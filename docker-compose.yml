@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  backend-engine:
+    build: ./backend
+    container_name: cryptostream_backend
+    ports:
+      - "8000:8000"
+    environment:
+      - PYTHONUNBUFFERED=1
+    restart: always
+
+  frontend-viewport:
+    build: ./frontend
+    container_name: cryptostream_frontend
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend-engine
+    restart: always
